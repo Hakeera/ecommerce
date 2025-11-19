@@ -2,7 +2,10 @@ package main
 
 import (
 	"erp/config"
+	"erp/internal/controller"
+	"erp/internal/repository"
 	"erp/internal/routes"
+	"erp/internal/service"
 	"html/template"
 	"log"
 
@@ -30,6 +33,13 @@ func main() {
 		log.Println("❌ Banco de dados é nil!")
 	}
 
+	// dependencies
+	userRepo := repository.NewUserRepository(db)
+	userService := service.NewUserService(userRepo)
+	userController := &controller.UserController{
+		UserService: userService,
+	}
+
 	tmpl := template.New("").Funcs(config.TemplateFunctions)
 	tmpl = template.Must(tmpl.ParseGlob("view/**/*.html"))
 
@@ -43,8 +53,8 @@ func main() {
 	e.Static("/static", "view/static")
 
 	// Configuração das rotas da aplicação
-	routes.SetUpRoutes(e)
+	routes.SetUpRoutes(e, userController)
 
 	log.Println("🚀 Servidor iniciando na porta :8080")
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start("127.0.0.1:8080"))
 }

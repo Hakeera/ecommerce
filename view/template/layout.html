@@ -1,0 +1,32 @@
+{{ define "base" }}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOMMERCE</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+</head>
+
+<body>
+
+    <h1>ECOMMERCE</h1>
+
+    <!-- NAVBAR -->
+    <nav style="margin-bottom: 20px;">
+        <button hx-get="/users" hx-target="#content" hx-swap="innerHTML">Lista Usuários</button>
+        <button hx-get="/users/new" hx-target="#content" hx-swap="innerHTML">Add User</button>
+        <button hx-get="/option/3" hx-target="#content" hx-swap="innerHTML">Opção 3</button>
+        <button hx-get="/option/4" hx-target="#content" hx-swap="innerHTML">Opção 4</button>
+        <button hx-get="/option/5" hx-target="#content" hx-swap="innerHTML">Opção 5</button>
+        <button hx-get="/option/6" hx-target="#content" hx-swap="innerHTML">Opção 6</button>
+    </nav>
+
+    <!-- ÁREA DINÂMICA -->
+    <div id="content">
+        Carregue uma opção acima...
+    </div>
+
+</body>
+</html>
+{{ end }}

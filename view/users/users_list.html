@@ -1,0 +1,25 @@
+{{ define "users_list" }}
+<h2>Users</h2>
+
+<a href="/users/new">
+	<button>New User</button>
+</a>
+
+<ul>
+	{{ range .Users}}
+	<li>
+		{{ .Username }} — {{ .Email }}
+
+		<button 
+			hx-delete="/users/{{ .ID }}" 
+			hx-target="#content" 
+			hx-swap="innerHTML"
+			style="margin-left: 10px;">
+			Delete
+		</button>
+	</li>
+	{{ else }}
+	<p>No users found.</p>
+	{{ end }}
+</ul>
+{{ end }}
