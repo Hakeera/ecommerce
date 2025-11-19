@@ -49,6 +49,7 @@ func InitDB() {
 		// Migração automática de tabelas principais
 		if err := DB.AutoMigrate(
 			&model.User{},
+			&model.Product{},
 		); err != nil {
 			log.Fatalf("❌ Erro na migração: %v", err)
 		}

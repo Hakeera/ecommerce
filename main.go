@@ -12,6 +12,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// TODO: CRUD Produtos - SQL, Rotas, Model, Controller, Service, Repository
+
 func main() {
 
 	// Carrega variáveis de ambiente e inicializa o banco
@@ -40,6 +42,12 @@ func main() {
 		UserService: userService,
 	}
 
+	productRepo := repository.NewProductRepository(db)
+	productService := service.NewProductService(productRepo)
+	productController := &controller.ProductController{
+		ProductService: productService,
+	}
+
 	tmpl := template.New("").Funcs(config.TemplateFunctions)
 	tmpl = template.Must(tmpl.ParseGlob("view/**/*.html"))
 
@@ -53,7 +61,7 @@ func main() {
 	e.Static("/static", "view/static")
 
 	// Configuração das rotas da aplicação
-	routes.SetUpRoutes(e, userController)
+	routes.SetUpRoutes(e, userController, productController)
 
 	log.Println("🚀 Servidor iniciando na porta :8080")
 	e.Logger.Fatal(e.Start("127.0.0.1:8080"))

@@ -47,8 +47,9 @@ var TemplateFunctions = template.FuncMap{
 	"upper": strings.ToUpper,
 
 	// Função formatMoney - formata valores monetários
-	"formatMoney": func(value float64) string {
-		return fmt.Sprintf("%.2f", value/100)
+	"formatMoney": func(value int) string {
+		reais := float64(value) / 100.0
+		return fmt.Sprintf("R$ %.2f", reais)
 	},
 
 	// Função replace - substitui strings

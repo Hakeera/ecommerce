@@ -33,6 +33,27 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- ============================
+-- Create "products" table
+-- ============================
+
+CREATE TABLE IF NOT EXISTS products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    image_url TEXT NOT NULL,
+    description TEXT,
+
+    price INTEGER NOT NULL,
+    stock INTEGER NOT NULL,
+
+    colors TEXT[] NOT NULL,
+    sizes  TEXT[] NOT NULL,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ============================
 -- Auto-update updated_at column on modifications
 -- ============================
 
@@ -44,9 +65,18 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- --- Users trigger ---
 DROP TRIGGER IF EXISTS update_users_timestamp ON users;
 
 CREATE TRIGGER update_users_timestamp
 BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION update_timestamp();
+
+-- --- Products trigger ---
+DROP TRIGGER IF EXISTS update_products_timestamp ON products;
+
+CREATE TRIGGER update_products_timestamp
+BEFORE UPDATE ON products
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();

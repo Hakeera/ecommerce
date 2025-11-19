@@ -1,0 +1,37 @@
+{{ define "product_list" }}
+<div class="product-grid">
+    {{ range .Products }}
+    <div class="product-card">
+        <img src="{{ .ImageURL }}" alt="{{ .Name }}">
+        <h3>{{ .Name }}</h3>
+        <p>{{ .Category }}</p>
+        <p>{{ formatMoney .Price }}</p>
+
+        <!-- Cores -->
+        <p><strong>Cores:</strong>
+        {{- if .Colors }}
+            {{ range $index, $color := .Colors }}
+                {{ if $index }}, {{ end }}{{ $color }}
+            {{ end }}
+        {{- else }}
+            Nenhuma
+        {{- end }}
+        </p>
+
+        <!-- Tamanhos -->
+        <p><strong>Tamanhos:</strong>
+        {{- if .Sizes }}
+            {{ range $index, $size := .Sizes }}
+                {{ if $index }}, {{ end }}{{ $size }}
+            {{ end }}
+        {{- else }}
+            Nenhum
+        {{- end }}
+        </p>
+
+    </div>
+    {{ else }}
+    <p>Nenhum produto encontrado para esta categoria.</p>
+    {{ end }}
+</div>
+{{ end }}

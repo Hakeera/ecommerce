@@ -1,0 +1,21 @@
+{{define "product_page"}}
+
+<nav class="navbar">
+	<ul class="nav-list">
+		{{ range .Categories }}
+		<li class="nav-item">
+			<button
+				class="nav-link"
+				hx-get="/products/by-category?category={{ . }}"
+				hx-target="#products"
+				hx-swap="innerHTML"
+			>
+				{{ . }}
+			</button>
+		</li>
+		{{ end }}
+	</ul>
+</nav>
+<div id="products"></div>
+
+{{end}}
