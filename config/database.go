@@ -4,7 +4,7 @@
 package config
 
 import (
-	"erp/internal/model"
+	"ecommerce/internal/model"
 	"fmt"
 	"log"
 	"os"

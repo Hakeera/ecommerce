@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"erp/internal/controller"
+	"ecommerce/internal/controller"
 
 	"github.com/labstack/echo/v4"
 )

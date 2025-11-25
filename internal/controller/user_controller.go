@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"erp/internal/model"
-	"erp/internal/service"
+	"ecommerce/internal/model"
+	"ecommerce/internal/service"
 	"net/http"
 
 	"github.com/labstack/echo/v4"

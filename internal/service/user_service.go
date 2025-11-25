@@ -1,8 +1,8 @@
 package service
 
 import (
-	"erp/internal/model"
-	"erp/internal/repository"
+	"ecommerce/internal/model"
+	"ecommerce/internal/repository"
 	"errors"
 	"fmt"
 )

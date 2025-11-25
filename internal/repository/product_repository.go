@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"erp/internal/model"
+	"ecommerce/internal/model"
 
 	"gorm.io/gorm"
 )

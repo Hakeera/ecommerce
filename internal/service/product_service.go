@@ -1,9 +1,10 @@
 package service
 
 import (
-	"erp/internal/model"
-	"erp/internal/repository"
+	"ecommerce/internal/model"
+	"ecommerce/internal/repository"
 	"errors"
+	"fmt"
 )
 
 // ProductService contains business rules and application-level logic.
@@ -24,5 +25,10 @@ func (s *ProductService) GetProductsByCategory(category string) ([]model.Product
 		return nil, errors.New("categoria não pode ser vazia")
 	}
 
-	return s.ProductRepository.FindByCategory(category)
+	products, err := s.ProductRepository.FindByCategory(category)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao buscar produtos por categoria: %w", err)
+	}
+
+	return products, nil
 }
